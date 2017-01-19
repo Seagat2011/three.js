@@ -268,7 +268,6 @@ THREE.ShaderTerrain = {
 			"varying vec3 vViewPosition;",
 
 			THREE.ShaderChunk[ "shadowmap_pars_vertex" ],
-			THREE.ShaderChunk[ "fog_pars_vertex" ],
 
 			"void main() {",
 
@@ -313,7 +312,6 @@ THREE.ShaderTerrain = {
 				"vNormal = normalMatrix * normalTex;",
 
 				THREE.ShaderChunk[ "shadowmap_vertex" ],
-				THREE.ShaderChunk[ "fog_vertex" ],
 
 			"}"
 

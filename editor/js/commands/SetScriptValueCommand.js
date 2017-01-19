@@ -9,11 +9,10 @@
  * @param attributeName string
  * @param newValue string, object
  * @param cursorPosition javascript object with format {line: 2, ch: 3}
- * @param scrollInfo javascript object with values {left, top, width, height, clientWidth, clientHeight}
  * @constructor
  */
 
-var SetScriptValueCommand = function ( object, script, attributeName, newValue, cursorPosition, scrollInfo ) {
+var SetScriptValueCommand = function ( object, script, attributeName, newValue, cursorPosition ) {
 
 	Command.call( this );
 
@@ -28,7 +27,6 @@ var SetScriptValueCommand = function ( object, script, attributeName, newValue, 
 	this.oldValue = ( script !== undefined ) ? script[ this.attributeName ] : undefined;
 	this.newValue = newValue;
 	this.cursorPosition = cursorPosition;
-	this.scrollInfo = scrollInfo;
 
 };
 
@@ -39,7 +37,7 @@ SetScriptValueCommand.prototype = {
 		this.script[ this.attributeName ] = this.newValue;
 
 		this.editor.signals.scriptChanged.dispatch();
-		this.editor.signals.refreshScriptEditor.dispatch( this.object, this.script, this.cursorPosition, this.scrollInfo );
+		this.editor.signals.refreshScriptEditor.dispatch( this.object, this.script, this.cursorPosition );
 
 	},
 
@@ -48,14 +46,13 @@ SetScriptValueCommand.prototype = {
 		this.script[ this.attributeName ] = this.oldValue;
 
 		this.editor.signals.scriptChanged.dispatch();
-		this.editor.signals.refreshScriptEditor.dispatch( this.object, this.script, this.cursorPosition, this.scrollInfo );
+		this.editor.signals.refreshScriptEditor.dispatch( this.object, this.script, this.cursorPosition );
 
 	},
 
 	update: function ( cmd ) {
 
 		this.cursorPosition = cmd.cursorPosition;
-		this.scrollInfo = cmd.scrollInfo;
 		this.newValue = cmd.newValue;
 
 	},
@@ -70,7 +67,6 @@ SetScriptValueCommand.prototype = {
 		output.oldValue = this.oldValue;
 		output.newValue = this.newValue;
 		output.cursorPosition = this.cursorPosition;
-		output.scrollInfo = this.scrollInfo;
 
 		return output;
 
@@ -86,7 +82,6 @@ SetScriptValueCommand.prototype = {
 		this.object = this.editor.objectByUuid( json.objectUuid );
 		this.script = this.editor.scripts[ json.objectUuid ][ json.index ];
 		this.cursorPosition = json.cursorPosition;
-		this.scrollInfo = json.scrollInfo;
 
 	}
 

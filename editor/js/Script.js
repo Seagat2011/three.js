@@ -84,7 +84,7 @@ var Script = function ( editor ) {
 
 				if ( value !== currentScript.source ) {
 
-					editor.execute( new SetScriptValueCommand( currentObject, currentScript, 'source', value, codemirror.getCursor(), codemirror.getScrollInfo() ) );
+					editor.execute( new SetScriptValueCommand( currentObject, currentScript, 'source', value, codemirror.getCursor() ) );
 
 				}
 				return;
@@ -422,7 +422,7 @@ var Script = function ( editor ) {
 
 	} );
 
-	signals.refreshScriptEditor.add( function ( object, script, cursorPosition, scrollInfo ) {
+	signals.refreshScriptEditor.add( function ( object, script, cursorPosition ) {
 
 		if ( currentScript !== script ) return;
 
@@ -435,7 +435,6 @@ var Script = function ( editor ) {
 		if ( cursorPosition !== undefined ) {
 
 			codemirror.setCursor( cursorPosition );
-			codemirror.scrollTo( scrollInfo.left, scrollInfo.top );
 
 		}
 		codemirror.setHistory( history ); // setting the history to previous state

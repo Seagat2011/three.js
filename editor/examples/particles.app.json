@@ -4,6 +4,7 @@
 	},
 	"project": {
 		"shadows": true,
+		"editable": true,
 		"vr": false
 	},
 	"camera": {

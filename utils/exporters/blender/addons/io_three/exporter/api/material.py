@@ -70,10 +70,7 @@ def bump_scale(material):
     :rtype: float
 
     """
-    logger.debug("material.bump_scale(%s)", material)
-    for texture in _valid_textures(material):
-        if texture.use_map_normal:
-            return texture.normal_factor
+    return normal_scale(material)
 
 
 @_material

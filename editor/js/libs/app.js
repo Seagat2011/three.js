@@ -6,6 +6,8 @@ var APP = {
 
 	Player: function () {
 
+		var scope = this;
+
 		var loader = new THREE.ObjectLoader();
 		var camera, scene, renderer;
 
